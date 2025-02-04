@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--Sebagai Identitas Website-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css.css">
+    <title>Kehidupan Hijau</title>
+</head>
+<body>
+    <!--Sebagai Header-->
+    <nav>
+        <div class="logo">KEHIDUPAN HIJAU</div>
+    </nav>
+    <!--Kotak 1-->
+    <section class="page2">
+        <img style="text-align: center;width: auto; height: auto;" src="https://media.kompas.tv/library/image/content_article/article_img/20230918071202.jpg">
+    </section>
+    <!--Kotak 2-->
+    <section class="page2">
+        <h3>Nilai BMI: <span id="result"></span></h3>
+        <h3>Status: <span id="interpretation"></span></h3>
+    </section>
+    <!--Kotak 3-->
+    <section class="page2">
+        <h3>Rekomendasi: <br><span id="rekomendasi"></span></h3>
+    </section>
+    <!--Tombol Kembali-->
+    <section class="page2">
+        <button onclick="kembali()">Kalkulasi Ulang</button>
+    <!--Kode Javascript-->
+    <script>
+        // Untuk mengambil data
+        var bmiResult = localStorage.getItem('bmiResult');
+        var bmiInterpretation = localStorage.getItem('bmiInterpretation');
+        var rekomendasiHasil = localStorage.getItem('rekomendasiHasil');
+
+        // Untuk menampilkan data 
+        document.getElementById('result').innerText = bmiResult ? bmiResult : "Data tidak tersedia";
+        document.getElementById('interpretation').innerText = bmiInterpretation ? bmiInterpretation : "Data tidak tersedia";
+        document.getElementById('rekomendasi').innerText = rekomendasiHasil ? rekomendasiHasil : "Data tidak tersedia";
+
+        // Fungsi untuk kembali ke halaman pertama dan mengosongkan localStorage
+        function kembali() {
+            localStorage.clear(); 
+            window.location.href = 'Index.html'; 
+        }
+    </script>
+</body>
+</html>

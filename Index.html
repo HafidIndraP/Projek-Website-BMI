@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--Sebagai Identitas Website-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css.css">
+    <title>Kehidupan Hijau</title>
+</head>
+<body>
+    <!--Sebagai Header-->
+    <nav>
+        <div class="logo">KEHIDUPAN HIJAU</div>
+    </nav>
+    <!--Kotak 1 dan Kalkulator-->
+    <section class="page1">
+        <section class="kalkulator">
+            <div class="calculator">
+                <h2>BMI Calculator</h2>
+                <label for="berat">Berat Badan (kg):</label>
+                <input type="number" id="berat" placeholder="Masukkan Berat Badan" required>
+                
+                <label for="tinggi">Tinggi Badan (cm):</label>
+                <input type="number" id="tinggi" placeholder="Masukkan Tinggi Badan" required>
+        
+                <label for="gender">Gender:</label>
+                <select id="gender">
+                    <option value="male">Laki-laki</option>
+                    <option value="female">Perempuan</option>
+                </select>
+        
+                <button onclick="calculateBMI()">Kalkulasi</button>
+            </div>
+        </section>
+    </section>
+    <!--Kode Javascript-->
+    <script>
+        // Deklarasi fungsi kalkulasi BMI
+        function calculateBMI() {
+            var berat = document.getElementById('berat').value;
+            var tinggi = document.getElementById('tinggi').value;
+            var gender = document.getElementById('gender').value;
+            //Algoritma kalkulasi
+            if (berat > 0 && tinggi > 0) {
+                var bmi = berat / ((tinggi / 100) * (tinggi / 100));
+                var interpretation = interpretBMI(bmi, gender);
+                var rekom = rekomendasi(bmi, gender);
+                
+                // Menyimpan hasil ke localStorage
+                localStorage.setItem('bmiResult', bmi.toFixed(2));
+                localStorage.setItem('bmiInterpretation', interpretation);
+                localStorage.setItem('rekomendasiHasil', rekom);
+                
+                // Arahkan ke halaman kedua
+                window.location.href = 'Index2.html';
+            } else {
+                //Pesan jika format data yang dimasukkan salah
+                alert("Tolong masukkan data yang benar");
+            }
+        }
+        // Deklarasi fungsi interpretasi hasil kalkulasi
+        function interpretBMI(bmi, gender) {
+            if (gender === 'male') {
+                if (bmi < 18.5) {
+                    return 'Kekurangan Berat Badan';
+                } else if (bmi >= 18.5 && bmi < 24.9) {
+                    return 'Normal';
+                } else if (bmi >= 25 && bmi < 29.9) {
+                    return 'Kelebihan Berat Badan';
+                } else if (bmi >= 30 && bmi < 34.9) {
+                    return 'Obesitas';
+                } else {
+                    return 'Obesitas Ekstrem';
+                }
+            } else if (gender === 'female') {
+                if (bmi < 18.5) {
+                    return 'Kekurangan Berat Badan';
+                } else if (bmi >= 18.5 && bmi < 24.9) {
+                    return 'Normal';
+                } else if (bmi >= 25 && bmi < 29.9) {
+                    return 'Kelebihan Berat Badan';
+                } else if (bmi >= 30 && bmi < 34.9) {
+                    return 'Obesitas';
+                } else {
+                    return 'Obesitas Ekstrem';
+                }
+            }
+        }
+        //Deklarasi fungsi rekomendasi berdasarkan status
+        function rekomendasi(bmi, gender) {
+            if (gender === 'male') {
+                if (bmi < 18.5) {
+                    return 'Tingkatkan asupan kalori dengan makanan bergizi tinggi seperti protein (daging, telur, susu), karbohidrat kompleks, dan lemak sehat. Olahraga beban untuk menambah massa otot.';
+                } else if (bmi >= 18.5 && bmi < 24.9) {
+                    return 'Pertahankan pola makan seimbang dan tetap aktif dengan olahraga rutin. Jaga hidrasi dan pola tidur yang baik.';
+                } else if (bmi >= 25 && bmi < 29.9) {
+                    return 'Kurangi asupan gula dan lemak jenuh, tingkatkan konsumsi serat dan protein. Lakukan latihan kardio dan beban secara rutin.';
+                } else if (bmi >= 30 && bmi < 34.9) {
+                    return 'Fokus pada defisit kalori dengan diet sehat, kurangi makanan olahan, dan perbanyak aktivitas fisik seperti jalan kaki, berenang, atau latihan interval intensitas tinggi (HIIT).';
+                }else {
+                    return 'Terapkan pola makan sehat dengan porsi terkendali, lebih banyak sayuran, protein rendah lemak, dan serat untuk menjaga rasa kenyang lebih lama. Kurangi karbohidrat sederhana dan makanan berlemak tinggi. Aktivitas fisik dimulai secara bertahap dengan jalan kaki, yoga, atau latihan di air untuk mengurangi tekanan pada sendi. Konsultasikan dengan tenaga medis untuk mendapatkan panduan yang sesuai, termasuk opsi terapi medis jika diperlukan.';
+                }
+            } else if (gender === 'female') {
+                if (bmi < 18.5) {
+                    return 'Konsumsi lebih banyak protein dan lemak sehat, tambahkan camilan bergizi seperti alpukat atau kacang-kacangan, serta latihan kekuatan untuk membangun massa otot.';
+                } else if (bmi >= 18.5 && bmi < 24.9) {
+                    return 'Pertahankan keseimbangan antara asupan nutrisi dan aktivitas fisik. Lakukan latihan kombinasi kardio dan kekuatan untuk menjaga kebugaran.';
+                } else if (bmi >= 25 && bmi < 29.9) {
+                    return 'Kurangi makanan tinggi gula dan olahan, perbanyak sayur dan protein tanpa lemak, serta lakukan olahraga seperti yoga atau aerobik.';
+                } else if (bmi >= 30 && bmi < 34.9) {
+                    return 'Terapkan pola makan rendah kalori dengan porsi terkontrol, batasi makanan cepat saji, dan tingkatkan aktivitas fisik secara bertahap, seperti jalan kaki atau bersepeda.';
+                } else {
+                    return 'Terapkan pola makan sehat dengan porsi terkendali, lebih banyak sayuran, protein rendah lemak, dan serat untuk menjaga rasa kenyang lebih lama. Kurangi karbohidrat sederhana dan makanan berlemak tinggi. Aktivitas fisik dimulai secara bertahap dengan jalan kaki, yoga, atau latihan di air untuk mengurangi tekanan pada sendi. Konsultasikan dengan tenaga medis untuk mendapatkan panduan yang sesuai, termasuk opsi terapi medis jika diperlukan.';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
